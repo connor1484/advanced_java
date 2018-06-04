@@ -1,18 +1,22 @@
-/*
- * Person class that will return the name and age of the person and also say Hello
- */
-
 package edu.connor.advancedjava;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.Period;
 
+/**
+ * Person class that will return the name and age of the person and also say Hello
+ *
+ */
 public class Person {
 
-    private String name;                //name of the person
-    private LocalDate dateOfBirth;      //date of birth of the person
+    private String name;
+    private LocalDate dateOfBirth;
 
-    //Constructor that requires the name and date of birth to be passed in and assigns them to the class variables
+    /**
+     * Creates a new Person with the given and given date of birth
+     * @param name
+     * @param dateOfBirth
+     */
     public Person(String name, LocalDate dateOfBirth) {
 
         this.name = name;
@@ -42,6 +46,7 @@ public class Person {
 
     /**
      * Says Hello to the person
+     *
      */
     public void sayHi() {
 

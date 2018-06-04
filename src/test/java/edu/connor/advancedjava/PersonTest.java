@@ -34,27 +34,27 @@ public class PersonTest  {
 
         //testing result of expected age
         age = student.getAge();
-        assertEquals(38, age);
+        assertEquals("Age of Person", 38, age);
     }
 
     @Test
     public void testName() {
         //testing result of name
-        assertEquals(name, student.getName());
+        assertEquals("Name of Person", name, student.getName());
     }
 
     @Test
     public void testNegativeAge() {
         //testing result of negative test where age is incorrect
         age = student.getAge();
-        assertFalse(age == 45);
+        assertFalse("False age of Person", age == 45);
     }
 
     @Test
     public void testNegativeName() {
         //test result of negative test where name is incorrect
         name = "Bill";
-        assertFalse(student.getName() == name);
+        assertFalse("False name of Person", student.getName() == name);
     }
 
 
