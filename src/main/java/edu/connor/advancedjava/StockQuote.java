@@ -16,6 +16,13 @@ public class StockQuote {
     private String stockSymbol;
     private String dateRecorded;
 
+    /**
+     * StockQuote contstructor that sets the stock symbol, date recorded and the stock price
+     *
+     * @param stockSymbol
+     * @param dateRecorded
+     * @param stockPrice
+     */
     public StockQuote(String stockSymbol, String dateRecorded, BigDecimal stockPrice ) {
 
         this.stockSymbol = stockSymbol;
