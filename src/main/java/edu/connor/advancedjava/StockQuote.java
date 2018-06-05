@@ -1,7 +1,7 @@
 package edu.connor.advancedjava;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 /**
@@ -14,13 +14,14 @@ public class StockQuote {
 
     private BigDecimal stockPrice;
     private String stockSymbol;
-    private Date dateRecorded;
+    private String dateRecorded;
 
-    public StockQuote(Date dateRecorded, BigDecimal stockPrice, String stockSymbol) {
+    public StockQuote(String stockSymbol, String dateRecorded, BigDecimal stockPrice ) {
 
+        this.stockSymbol = stockSymbol;
         this.dateRecorded = dateRecorded;
         this.stockPrice = stockPrice;
-        this.stockSymbol = stockSymbol;
+
 
     }
 
@@ -44,6 +45,6 @@ public class StockQuote {
      *
      * @return recorded date of the stock
      */
-    public Date getDateRecorded() { return dateRecorded; }
+    public String getDateRecorded() { return dateRecorded; }
 
 }
