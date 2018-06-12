@@ -1,5 +1,13 @@
 package edu.connor.advancedjava;
+
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -20,9 +28,36 @@ public class BasicStockService implements StockService {
      */
     public StockQuote getQuote(String symbol) {
 
-        String date = "2018-06-04";
-        BigDecimal stockPrice = new BigDecimal(150.00);
-        return new StockQuote("ATHN", date, stockPrice);
+        return new StockQuote("ATHN", Calendar.getInstance(), new BigDecimal(20.00));
+    }
+
+    public List<StockQuote> getQuote(String symbol, Calendar from, Calendar until) {
+
+        List<StockQuote> stockQuotes = new ArrayList<>();
+
+        Date applDate = null;
+        try {
+            applDate = new SimpleDateFormat("mm/dd/yyyy").parse("06/12/1985");
+            Calendar applDateFinal = Calendar.getInstance();
+            applDateFinal.setTime(applDate);
+
+            stockQuotes.add(new StockQuote("APPL",applDateFinal, new BigDecimal("15.00")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date googDate = null;
+        try {
+            googDate = new SimpleDateFormat("mm/dd/yyyy").parse("01/01/2018");
+            Calendar googDateFinal = Calendar.getInstance();
+            googDateFinal.setTime(googDate);
+
+            stockQuotes.add(new StockQuote("GOOG",googDateFinal, new BigDecimal("35.00")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>();
     }
 
 }

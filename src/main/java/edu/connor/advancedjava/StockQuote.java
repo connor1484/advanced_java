@@ -2,6 +2,7 @@ package edu.connor.advancedjava;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 
 /**
@@ -14,7 +15,7 @@ public class StockQuote {
 
     private BigDecimal stockPrice;
     private String stockSymbol;
-    private String dateRecorded;
+    private Calendar dateRecorded;
 
     /**
      * StockQuote contstructor that sets the stock symbol, date recorded and the stock price
@@ -23,7 +24,7 @@ public class StockQuote {
      * @param dateRecorded
      * @param stockPrice
      */
-    public StockQuote(String stockSymbol, String dateRecorded, BigDecimal stockPrice ) {
+    public StockQuote(String stockSymbol, Calendar dateRecorded, BigDecimal stockPrice ) {
 
         this.stockSymbol = stockSymbol;
         this.dateRecorded = dateRecorded;
@@ -52,6 +53,6 @@ public class StockQuote {
      *
      * @return recorded date of the stock
      */
-    public String getDateRecorded() { return dateRecorded; }
+    public Calendar getDateRecorded() { return dateRecorded; }
 
 }
