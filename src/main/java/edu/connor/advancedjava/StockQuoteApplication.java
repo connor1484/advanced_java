@@ -1,5 +1,6 @@
 package edu.connor.advancedjava;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,11 +25,17 @@ public class StockQuoteApplication {
      */
     public static void main(String[] args){
 
-        StockService StockService = StockServiceFactory.getInstance();
+        //Check that arguments were provided
+        if (args.length != 3){
+            throw new NullPointerException("No args provided");
+        }
 
-        String from = "11/20/2017";
-        String until = "01/20/2018";
-        String symbol = "NUAN";
+        StockService stockService = StockServiceFactory.getInstance();
+
+
+        String symbol = args[0];
+        String from = args[1];
+        String until = args[2];
         Date fromDate = null;
         Date untilDate = null;
 
@@ -51,10 +58,13 @@ public class StockQuoteApplication {
         Calendar untilDateCal = Calendar.getInstance();
         untilDateCal.setTime(untilDate);
 
-        List<StockQuote> quotes = StockService.getQuote(symbol, fromDateCal, untilDateCal);
 
+        List<StockQuote> quotes = stockService.getQuote(symbol, fromDateCal, untilDateCal);
+
+        System.out.println(fromDate);
         for (StockQuote stockQuote: quotes) {
-            System.out.print("Stock Quote: " + stockQuote);
+            System.out.print("Stock Symbol: " + stockQuote.getStockSymbol() + "\n" + "Stock Date: " + stockQuote.getDateRecorded()
+            + "\n" + "Stock Price: " + stockQuote.getStockPrice() + "\n");
         }
 
     }

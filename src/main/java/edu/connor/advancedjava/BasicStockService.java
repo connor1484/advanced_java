@@ -57,7 +57,7 @@ public class BasicStockService implements StockService {
             e.printStackTrace();
         }
 
-        return new ArrayList<>();
+        return stockQuotes;
     }
 
 }

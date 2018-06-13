@@ -3,6 +3,7 @@ package edu.connor.advancedjava;
 
 import org.junit.Before;
 import edu.connor.advancedjava.StockQuote;
+import edu.connor.advancedjava.StockQuoteApplication;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -93,6 +94,11 @@ public class StockTest {
         Double wrongPrice = 199.00;
         assertFalse("Price negative test", wrongPrice == testQuote.getStockPrice().doubleValue());
 
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testMainNegative() {
+        StockQuoteApplication.main(null);
     }
 
 
