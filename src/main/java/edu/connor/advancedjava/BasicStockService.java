@@ -1,12 +1,16 @@
 package edu.connor.advancedjava;
 
+import src.main.java.edu.connor.advancedjava.IntervalEnum;
+
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import static java.lang.System.exit;
 
 
 /**
@@ -26,14 +30,25 @@ public class BasicStockService implements StockService {
      *
      * @return StockQuote Object
      */
+
+    @Override
     public StockQuote getQuote(String symbol) {
 
         return new StockQuote("ATHN", Calendar.getInstance(), new BigDecimal(20.00));
     }
 
-    public List<StockQuote> getQuote(String symbol, Calendar from, Calendar until) {
 
-        List<StockQuote> stockQuotes = new ArrayList<>();
+    /**
+     * @param symbol the stock symbol of the company you want a quote for.
+     * @param from the beginning date of the stock
+     * @param until the end date of the stock
+     * @param intervalEnum the interval to check for a quote
+     * @return StockQuote list
+     */
+    @Override
+    public List<StockQuote> getQuote(String symbol, Calendar from, Calendar until, IntervalEnum intervalEnum) {
+
+        List<StockQuote> stockQuotes = new ArrayList<StockQuote>();
 
         Date applDate = null;
         try {
@@ -43,7 +58,8 @@ public class BasicStockService implements StockService {
 
             stockQuotes.add(new StockQuote("APPL",applDateFinal, new BigDecimal("15.00")));
         } catch (ParseException e) {
-            e.printStackTrace();
+            e.getMessage();
+            exit(-1);
         }
 
         Date googDate = null;
@@ -54,7 +70,8 @@ public class BasicStockService implements StockService {
 
             stockQuotes.add(new StockQuote("GOOG",googDateFinal, new BigDecimal("35.00")));
         } catch (ParseException e) {
-            e.printStackTrace();
+            e.getMessage();
+            exit(-1);
         }
 
         return stockQuotes;

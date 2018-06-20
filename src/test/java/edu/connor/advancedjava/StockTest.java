@@ -1,8 +1,8 @@
-//package src.test.java.edu.connor.advancedjava;
 package edu.connor.advancedjava;
 
 import org.junit.Before;
 import edu.connor.advancedjava.StockQuote;
+import src.main.java.edu.connor.advancedjava.IntervalEnum;
 import edu.connor.advancedjava.StockQuoteApplication;
 
 import java.math.BigDecimal;
@@ -101,6 +101,20 @@ public class StockTest {
         StockQuoteApplication.main(null);
     }
 
+    @Test
+    public void testInterval() {
 
+        IntervalEnum interval = IntervalEnum.DAILY;
+        assertEquals("interval test", interval, IntervalEnum.DAILY);
+    }
+
+
+    @Test
+    public void testNegativeInterval() {
+
+        String intervalTest = "daily";
+        IntervalEnum interval = IntervalEnum.DAILY;
+        assertFalse("interval test", interval == IntervalEnum.MONTHLY);
+    }
 
 }

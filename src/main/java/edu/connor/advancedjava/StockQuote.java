@@ -1,7 +1,8 @@
 package edu.connor.advancedjava;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Calendar;
 
 
@@ -11,6 +12,8 @@ import java.util.Calendar;
  *
  * The purpose of this class is to provide the blueprint for creating a StockQuote Object
  */
+
+@Immutable
 public class StockQuote {
 
     private BigDecimal stockPrice;
@@ -24,7 +27,7 @@ public class StockQuote {
      * @param dateRecorded
      * @param stockPrice
      */
-    public StockQuote(String stockSymbol, Calendar dateRecorded, BigDecimal stockPrice ) {
+    public StockQuote(String stockSymbol, Calendar dateRecorded, BigDecimal stockPrice) {
 
         this.stockSymbol = stockSymbol;
         this.dateRecorded = dateRecorded;

@@ -1,12 +1,14 @@
 package edu.connor.advancedjava;
 
-import java.math.BigDecimal;
+import src.main.java.edu.connor.advancedjava.IntervalEnum;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import static java.lang.System.exit;
 
 
 /**
@@ -26,8 +28,8 @@ public class StockQuoteApplication {
     public static void main(String[] args){
 
         //Check that arguments were provided
-        if (args.length != 3){
-            throw new NullPointerException("No args provided");
+        if (args.length != 4){
+            throw new IllegalArgumentException("No args provided");
         }
 
         StockService stockService = StockServiceFactory.getInstance();
@@ -36,6 +38,7 @@ public class StockQuoteApplication {
         String symbol = args[0];
         String from = args[1];
         String until = args[2];
+        String interval = args[3];
         Date fromDate = null;
         Date untilDate = null;
 
@@ -44,6 +47,7 @@ public class StockQuoteApplication {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             System.out.println("From Date must be in format mm/dd/yyy");
+            exit(-1);
         }
 
         try {
@@ -51,6 +55,7 @@ public class StockQuoteApplication {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             System.out.println("Until Date must be in format mm/dd/yyy");
+            exit(-1);
         }
 
         Calendar fromDateCal = Calendar.getInstance();
@@ -58,13 +63,26 @@ public class StockQuoteApplication {
         Calendar untilDateCal = Calendar.getInstance();
         untilDateCal.setTime(untilDate);
 
+        IntervalEnum chosenInterval;
 
-        List<StockQuote> quotes = stockService.getQuote(symbol, fromDateCal, untilDateCal);
+        if (interval.equalsIgnoreCase("daily")) {
+            chosenInterval = IntervalEnum.DAILY;
+        } else if (interval.equalsIgnoreCase("weekly")) {
+            chosenInterval = IntervalEnum.WEEKLY;
+        } else if (interval.equalsIgnoreCase("monthly")) {
+            chosenInterval = IntervalEnum.MONTHLY;
+        } else if (interval.equalsIgnoreCase("yearly")){
+            chosenInterval = IntervalEnum.YEARLY;
+        } else chosenInterval = IntervalEnum.DAILY;
+
+
+        List<StockQuote> quotes = stockService.getQuote(symbol, fromDateCal, untilDateCal, chosenInterval);
 
         System.out.println(fromDate);
         for (StockQuote stockQuote: quotes) {
             System.out.print("Stock Symbol: " + stockQuote.getStockSymbol() + "\n" + "Stock Date: " + stockQuote.getDateRecorded()
-            + "\n" + "Stock Price: " + stockQuote.getStockPrice() + "\n");
+            + "\n" + "Stock Price: " + stockQuote.getStockPrice() + "\n" );
+            System.out.println(chosenInterval);
         }
 
     }
