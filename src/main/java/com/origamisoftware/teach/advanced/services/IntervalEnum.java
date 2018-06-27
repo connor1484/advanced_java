@@ -1,4 +1,4 @@
-package src.main.java.edu.connor.advancedjava;
+package com.origamisoftware.teach.advanced.services;
 
 /**
  * Enum for the interval a stock quote will be received, either Hourly, Daily, Weekly, Monthly or Yearly
