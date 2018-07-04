@@ -9,4 +9,4 @@ jobs:
       - MYSQL_USER: monty
       - MYSQL_PASSWORD: some_pass
     steps:
-      - run: /usr/bin/sudo apt-get install -y mysql-client
+      - run: apt-get install -y mysql-client
