@@ -1,28 +1,20 @@
 package com.origamisoftware.teach.advanced.services;
 
-import com.origamisoftware.teach.advanced.model.StockQuote;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 /**
  * A factory that returns a <CODE>StockService</CODE> instance.
  */
-public class StockServiceFactory {
+public class ServiceFactory {
 
     /**
      * Prevent instantiations
      */
-    private StockServiceFactory() {}
+    private ServiceFactory() {}
 
     /**
      *
      * @return get a <CODE>StockService</CODE> instance
      */
-    public static StockService getInstance() {
+    /*public static StockService getInstance() {
         return new StockService() {
             @Override
             public StockQuote getQuote(String symbol) throws StockServiceException {
@@ -51,6 +43,10 @@ public class StockServiceFactory {
                 }
                 return stockQuotes;            }
         };
-    }
+    }*/
+
+    public static StockService getStockServiceInstance() { return new SimpleStockService(); }
+
+    public static SimplePersonService getPersonServiceInstance() { return new SimplePersonService(); }
 
 }
