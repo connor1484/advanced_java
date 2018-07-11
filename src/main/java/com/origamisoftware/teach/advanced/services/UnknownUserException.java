@@ -1,9 +1,21 @@
 package com.origamisoftware.teach.advanced.services;
 
 /**
- * Used to signal an issue with ActivitiesService
+ * Used to signal a user that was expected to exist in the system does not.
  */
-public class ActivitiesServiceException extends Exception {
+public class UnknownUserException extends Exception {
+
+    /**
+     * Constructs a new exception with the specified detail message.  The
+     * cause is not initialized, and may subsequently be initialized by
+     * a call to {@link #initCause}.
+     *
+     * @param message the detail message. The detail message is saved for
+     *                later retrieval by the {@link #getMessage()} method.
+     */
+    public UnknownUserException(String message) {
+        super(message);
+    }
 
     /**
      * Constructs a new exception with the specified detail message and
@@ -19,7 +31,7 @@ public class ActivitiesServiceException extends Exception {
      *                unknown.)
      * @since 1.4
      */
-    public ActivitiesServiceException(String message, Throwable cause) {
+    public UnknownUserException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -2,9 +2,10 @@ package com.origamisoftware.teach.advanced.apps.stockquote;
 
 import com.origamisoftware.teach.advanced.model.StockQuery;
 import com.origamisoftware.teach.advanced.model.StockQuote;
-import com.origamisoftware.teach.advanced.services.ServiceFactory;
 import com.origamisoftware.teach.advanced.services.StockService;
 import com.origamisoftware.teach.advanced.services.StockServiceException;
+import com.origamisoftware.teach.advanced.services.ServiceFactory;
+import com.origamisoftware.teach.advanced.util.Interval;
 
 import java.text.ParseException;
 import java.util.List;
@@ -73,7 +74,10 @@ public class BasicStockQuoteApplication {
         StringBuilder stringBuilder = new StringBuilder();
 
         List<StockQuote> stockQuotes =
-                stockService.getQuote(stockQuery.getSymbol(), stockQuery.getFrom(), stockQuery.getUntil());
+                stockService.getQuote(stockQuery.getSymbol(),
+                        stockQuery.getFrom(),
+                        stockQuery.getUntil(),
+                        Interval.DAY); // get one quote for each day in the from until date range.
 
         stringBuilder.append("Stock quotes for: " + stockQuery.getSymbol() + "\n");
         for (StockQuote stockQuote : stockQuotes) {
@@ -109,7 +113,6 @@ public class BasicStockQuoteApplication {
     /**
      * Run the StockTicker application.
      * <p/>
-     * When invoking the program supply one ore more stock symbols.
      *
      * @param args one or more stock symbols
      */
@@ -118,15 +121,14 @@ public class BasicStockQuoteApplication {
         // be optimistic init to positive values
         ProgramTerminationStatusEnum exitStatus = ProgramTerminationStatusEnum.NORMAL;
         String programTerminationMessage = "Normal program termination.";
-        if (args.length != 4) {
+        if (args.length != 3) {
             exit(ProgramTerminationStatusEnum.ABNORMAL,
-                    "Please supply 4 arguments a stock symbol, a start date (MM/DD/YYYY) an end date (MM/DD/YYYY) " +
-                            "and an interval of DAILY, WEEKLY, MONTHLY, YEARLY");
+                    "Please supply 3 arguments a stock symbol, a start date (MM/DD/YYYY) and end date (MM/DD/YYYY)");
         }
         try {
 
             StockQuery stockQuery = new StockQuery(args[0], args[1], args[2]);
-            StockService stockService = ServiceFactory.getStockServiceInstance();
+            StockService stockService = ServiceFactory.getStockService();
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
             basicStockQuoteApplication.displayStockQuotes(stockQuery);
@@ -137,6 +139,9 @@ public class BasicStockQuoteApplication {
         } catch (StockServiceException e) {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "StockService failed: " + e.getMessage();
+        }  catch (Throwable t) {
+            exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+            programTerminationMessage = "General application error: " + t.getMessage();
         }
 
         exit(exitStatus, programTerminationMessage);
