@@ -8,6 +8,6 @@ jobs:
       - MYSQL_DATABASE: stocks
       - MYSQL_USER: monty
       - MYSQL_PASSWORD: some_pass
-    steps:
+		steps:
 			- checkout
 			- run: apt-get install -y mysql-client
