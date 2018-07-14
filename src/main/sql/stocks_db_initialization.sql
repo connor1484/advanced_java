@@ -2,6 +2,7 @@
 
 DROP DATABASE stocks;
 CREATE DATABASE stocks;
+USE stocks;
 
 DROP TABLE IF EXISTS stocks.person CASCADE;
 CREATE TABLE stocks.person
