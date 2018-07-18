@@ -1,23 +1,15 @@
 package com.origamisoftware.teach.advanced.services;
 
 import com.origamisoftware.teach.advanced.model.StockData;
-import com.origamisoftware.teach.advanced.model.StockQuote;
 import com.origamisoftware.teach.advanced.util.DatabaseInitializationException;
-import com.origamisoftware.teach.advanced.util.Interval;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Unit tests for the DatabaseStockService
@@ -32,6 +24,7 @@ public class DatabaseStockServiceTest extends DatabaseServiceTest {
         databaseStockService = ServiceFactory.getStockService();
     }
 
+    /*
     @Test
     public void testGetQuote() throws Exception {
         String symbol = "APPL";
@@ -84,7 +77,7 @@ public class DatabaseStockServiceTest extends DatabaseServiceTest {
         List<StockQuote> stockQuotes =
                 databaseStockService.getQuote(symbol, fromCalendar, untilCalendar, Interval.MINUTE);
         assertEquals("got back expected number of stockquotes for one minute interval", 3, stockQuotes.size());
-    }
+    }*/
 
     /**
      * Handy dandy helper method that converts Strings in the format of   StockData.dateFormat

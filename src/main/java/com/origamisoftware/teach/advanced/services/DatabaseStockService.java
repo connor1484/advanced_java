@@ -1,5 +1,6 @@
 package com.origamisoftware.teach.advanced.services;
 
+import com.origamisoftware.teach.advanced.model.StockData;
 import com.origamisoftware.teach.advanced.model.StockQuote;
 import com.origamisoftware.teach.advanced.model.database.QuoteDAO;
 import com.origamisoftware.teach.advanced.model.database.StockSymbolDAO;
@@ -12,6 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +23,8 @@ import java.util.List;
  * An implementation of the StockService interface that gets
  * stock data from a database.
  */
+
+
 class DatabaseStockService implements StockService {
 
     /**
@@ -54,6 +58,8 @@ class DatabaseStockService implements StockService {
 
         return stockQuote;
     }
+
+
 
     /**
      * Get a historical list of stock quotes for the provide symbol
@@ -109,7 +115,7 @@ class DatabaseStockService implements StockService {
             }
         }
 
-        /**
+
          SimpleDateFormat simpleDateFormat = new SimpleDateFormat(StockData.dateFormat);
 
          String fromString = simpleDateFormat.format(from.getTime());
@@ -117,7 +123,7 @@ class DatabaseStockService implements StockService {
 
          String queryString = "select * from quote where symbol = '" + symbol + "'"
          + "and time BETWEEN '" + fromString + "' and '" + untilString + "'";
-         **/
+
 
         /**
          *
