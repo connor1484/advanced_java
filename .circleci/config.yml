@@ -33,11 +33,11 @@ jobs:
       - run: sudo apt list --installed | grep -i mysql
       - run: sudo pkill mysqld
       - run: sudo /etc/init.d/mysql start
-      - run: sudo echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'password'" | mysql -u root
-      - run: sudo echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root
-      - run: sudo echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION" | mysql -u root
-      - run: sudo echo "FLUSH PRIVILEGES" | mysql -u root
-      - run: sudo echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root
+      - run: sudo sh -c "echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'password'" | mysql -u root"
+      - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root"
+      - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION" | mysql -u root"
+      - run: sudo sh -c "echo "FLUSH PRIVILEGES" | mysql -u root"
+      - run: sudo sh -c "echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root"
       - save_cache:
           paths:
             - ~/.m2
