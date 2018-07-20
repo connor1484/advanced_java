@@ -4,13 +4,13 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-      - image: image:mysql:5.6
+      - image: circleci/mysql:5-ram
     environment:
-      - MYSQL_ROOT_PASSWORD: somepass
+      - MYSQL_ROOT_PASSWORD: some_pass
       - MYSQL_DATABASE: stocks
       - MYSQL_ROOT_HOST: 127.0.0.1
       - MYSQL_USER: stocks
-      - MYSQL_PASSWORD: somepass
+      - MYSQL_PASSWORD: some_pass
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at circleci.com/docs/2.0/circleci-images
