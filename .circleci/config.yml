@@ -31,11 +31,10 @@ jobs:
       - run: mvn dependency:go-offline
       - run: sudo apt-get update -y && sudo apt-get dist-upgrade -y && sudo apt-get -q install -y mysql-server
       - run: sudo apt list --installed | grep -i mysql
-      - run: sudo service mysql start
-      - run: echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'password'" | mysql -u root -psomepass
-      - run: echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root -psomepass
-      - run: echo "FLUSH PRIVILEGES" | mysql -u root -psomepass
-      - run: echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root -psomepass
+      - run: echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'password'" | mysql -u root
+      - run: echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root
+      - run: echo "FLUSH PRIVILEGES" | mysql -u root
+      - run: echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root
       - save_cache:
           paths:
             - ~/.m2
