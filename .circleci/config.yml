@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+      - image: circleci/mysql:5-ram
+    environment:
+      - MYSQL_ROOT_PASSWORD: some_pass
+      - MYSQL_DATABASE: stocks
+      - MYSQL_ROOT_HOST: 127.0.0.1
+      - MYSQL_USER: stocks
+      - MYSQL_PASSWORD: some_pass
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at circleci.com/docs/2.0/circleci-images
+      # - image: circleci/postgres:9.4
+    working_directory: ~/repo
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - run: sudo apt-get -q install -y mysql-server
+      - run: sudo apt list --installed | grep -i mysql
+      - run: sudo pkill mysqld
+      - run: sudo /etc/init.d/mysql start
+      - run: sudo sh -c "echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'some_pass'" | mysql -u root"
+      - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root"
+      - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION" | mysql -u root"
+      - run: sudo sh -c "echo "alter user 'monty'@'localhost' identified with mysql_native_password by 'some_pass'" | mysql -u root"
+      - run: sudo sh -c "echo "FLUSH PRIVILEGES" | mysql -u root"
+      - run: sudo sh -c "echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root"
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run: mvn integration-test
