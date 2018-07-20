@@ -29,7 +29,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: mvn dependency:go-offline
-      #- run: sudo apt-get update -y && sudo apt-get dist-upgrade -y && sudo apt-get -q install -y mysql-server
+      - run: sudo apt-get -q install -y mysql-server
       - run: sudo apt list --installed | grep -i mysql
       - run: sudo pkill mysqld
       - run: sudo /etc/init.d/mysql start
