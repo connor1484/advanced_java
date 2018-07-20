@@ -124,6 +124,8 @@ class DatabaseStockService implements StockService {
          String queryString = "select * from quote where symbol = '" + symbol + "'"
          + "and time BETWEEN '" + fromString + "' and '" + untilString + "'";
 
+         System.out.println(queryString);
+
 
         /**
          *

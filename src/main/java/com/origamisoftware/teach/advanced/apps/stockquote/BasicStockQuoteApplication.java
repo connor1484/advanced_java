@@ -118,6 +118,8 @@ public class BasicStockQuoteApplication {
      */
     public static void main(String[] args) {
 
+        StockQuery stockQuery = null;
+
         // be optimistic init to positive values
         ProgramTerminationStatusEnum exitStatus = ProgramTerminationStatusEnum.NORMAL;
         String programTerminationMessage = "Normal program termination.";
@@ -127,7 +129,7 @@ public class BasicStockQuoteApplication {
         }
         try {
 
-            StockQuery stockQuery = new StockQuery(args[0], args[1], args[2]);
+            stockQuery = new StockQuery(args[0], args[1], args[2]);
             StockService stockService = ServiceFactory.getStockService();
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
@@ -141,6 +143,7 @@ public class BasicStockQuoteApplication {
             programTerminationMessage = "StockService failed: " + e.getMessage();
         }  catch (Throwable t) {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+            System.out.println(stockQuery.getSymbol() + stockQuery.getFrom().getTime() + stockQuery.getUntil());
             programTerminationMessage = "General application error: " + t.getMessage();
         }
 

@@ -1,12 +1,38 @@
-version: 1
+version: 2
 jobs:
   build:
     docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
       - image: circleci/mysql:latest-ram
     environment:
-      - MYSQL_ROOT_PASSWORD: some_pass
+      - MYSQL_ROOT_PASSWORD: somepass
       - MYSQL_DATABASE: stocks
-      - MYSQL_USER: monty
-      - MYSQL_PASSWORD: some_pass
+      - MYSQL_ROOT_HOST: 127.0.0.1
+      - MYSQL_USER: stocks
+      - MYSQL_PASSWORD: somepass
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at circleci.com/docs/2.0/circleci-images
+      # - image: circleci/postgres:9.4
+    working_directory: ~/repo
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
     steps:
-      - run: apt-get update -y && apt-get dist-upgrade -y && export DEBIAN_FRONTEND=noninteractive && apt-get -q install -y mysql-client
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - run: sudo apt install -y mysql-client
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run: mvn integration-test

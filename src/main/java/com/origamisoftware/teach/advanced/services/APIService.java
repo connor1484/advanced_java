@@ -6,6 +6,7 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class APIService {
 
     }
 
+    public StockQuote getQuote(String symbol) {
+        // a dead simple implementation.
+        return new StockQuote(new BigDecimal(100), Calendar.getInstance().getTime(), symbol);
+    }
+
 
     /**
      * Get a historical list of stock quotes for the provide symbol
@@ -56,6 +62,10 @@ public class APIService {
         Stock quote = YahooFinance.get(_symbol);
 
         List<HistoricalQuote> stockHistQuotes = quote.getHistory(from, until, Interval.DAILY);
+
+        System.out.println("test");
+        System.out.println(_symbol);
+        System.out.println(quote);
 
         return (StockQuote) stockHistQuotes;
     }
