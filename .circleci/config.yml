@@ -36,6 +36,7 @@ jobs:
       - run: sudo sh -c "echo "CREATE USER IF NOT EXISTS 'monty'@'localhost' IDENTIFIED BY 'some_pass'" | mysql -u root"
       - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION" | mysql -u root"
       - run: sudo sh -c "echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION" | mysql -u root"
+      - run: sudo sh -c "echo "alter user 'monty'@'localhost' identified with mysql_native_password by 'some_pass'"
       - run: sudo sh -c "echo "FLUSH PRIVILEGES" | mysql -u root"
       - run: sudo sh -c "echo "CREATE DATABASE IF NOT EXISTS stocks" | mysql -u root"
       - save_cache:
