@@ -1,10 +1,10 @@
 <html>
 <body>
-<h2>Hello Advanced Java Professor!</h2>
+<h2>Hello Professor Marks!</h2>
 
 <h3>
     <UL>
-        <LI>Now checkout this test of my code <A href="StockQuote.jsp">for this weeks assignment.</A>
+        <LI>Here is the StockQuote code for assignment 9</LI> <A href="StockQuote.jsp">HERE.</A>
     </UL>
 </h3>
 </body>

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: connorryan
-  Date: 7/24/18
-  Time: 9:36 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="StockQuote" class="com.origami.teach.model.StockQuote" scope="request"/>
 

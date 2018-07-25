@@ -12,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Simple Example of how a servlet can access form submission data
@@ -48,17 +47,19 @@ public class StockSearchServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Calendar cal = Calendar. getInstance();
-        cal.setTime(pdate);
-        StockQuote stockQuote = new StockQuote(new BigDecimal(PRICE), Calendar.getInstance().getTime(), SYMBOL);
+        //Calendar cal = Calendar. getInstance();
+        //cal.setTime(pdate);
+        //StockQuote stockQuote = new StockQuote(new BigDecimal(PRICE), pdate, SYMBOL);
 
         session.setAttribute("symbol", SYMBOL);
         session.setAttribute("price", PRICE);
         session.setAttribute("date", DATE);
 
+        StockQuote stockQuote = new StockQuote(new BigDecimal(PRICE), pdate, SYMBOL);
+
         ServletContext servletContext = getServletContext();
         RequestDispatcher dispatcher =
-                servletContext.getRequestDispatcher("/stockquoteResults.jsp");
+                servletContext.getRequestDispatcher("stockquoteResults.jsp");
         dispatcher.forward(request, response);
 
     }
