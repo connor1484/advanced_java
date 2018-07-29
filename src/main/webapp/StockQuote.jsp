@@ -17,7 +17,7 @@
 
 <P></P>
 
-<form name="myform" action="/servlets/StockSearchServlet/" method="post">
+<form name="myform" action="StockQuoteResults.jsp" method="post">
     Symbol : <input type="text" name="symbol"
                     value='<%= StockQuote.getSymbol() == null ? "" : StockQuote.getSymbol() %>'><br>
     From : <input type="text" name="from"
