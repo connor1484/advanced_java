@@ -17,13 +17,12 @@
 
 <P></P>
 
-<form name="myform" action="StockQuoteResults.jsp" method="post">
-    Symbol : <input type="text" name="symbol"
-                    value='<%= StockQuote.getSymbol() == null ? "" : StockQuote.getSymbol() %>'><br>
-    From : <input type="text" name="from"
-                  value='<%= StockQuote.getPrice()== null ? "" : StockQuote.getPrice() %>'><br>
-    Until : <input type="text" name="until"
-                   value='<%= StockQuote.getDate()== null ? "" : StockQuote.getDate() %>'><br>
+<form name="myform" action="servlets/StockSearchServlet/" method="post">
+    Symbol : <input type="text" name="symbol"><br>
+    From : <input type="text" name="from"><br>
+    Until : <input type="text" name="until">'><br>
+    Yahoo Source :  <input type="radio" name="source" title="yahoo" value="yahoo">
+    Database Source : <input type="radio" name="source" title="database" value="database"><br>
 
     <input type="SUBMIT" value="OK">
     <input type="HIDDEN" name="submit" value="true">

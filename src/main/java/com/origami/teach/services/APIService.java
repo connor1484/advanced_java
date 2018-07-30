@@ -63,10 +63,6 @@ public class APIService {
 
         List<HistoricalQuote> stockHistQuotes = quote.getHistory(from, until, Interval.DAILY);
 
-        System.out.println("test");
-        System.out.println(_symbol);
-        System.out.println(quote);
-
         return (StockQuote) stockHistQuotes;
     }
 
