@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 
-class DatabaseStockService implements StockService {
+public class DatabaseStockService implements StockService {
 
     /**
      * Return the current price for a share of stock  for the given symbol

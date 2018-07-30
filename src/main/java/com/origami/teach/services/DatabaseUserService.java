@@ -13,7 +13,7 @@ import org.hibernate.exception.ConstraintViolationException;
 /**
  * An implementation of the UserService interface that gets uses a database.
  */
-class DatabaseUserService implements UserService {
+public class DatabaseUserService implements UserService {
 
     /**
      * Add a user to the system.

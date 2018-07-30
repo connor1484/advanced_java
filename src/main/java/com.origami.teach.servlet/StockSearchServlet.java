@@ -1,6 +1,8 @@
 package com.origami.teach.servlet;
 
 import com.origami.teach.model.StockQuote;
+import com.origami.teach.services.StockService;
+import com.origami.teach.services.ServiceFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -40,7 +42,8 @@ public class StockSearchServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        StockService stockService = ServiceFactory.getStockServiceInstance();
+        StockService stockService = ServiceFactory.getStockService();
+        //StockService stockService = (StockService) ServiceFactory.getUserService();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date pdate = null;
         try {
